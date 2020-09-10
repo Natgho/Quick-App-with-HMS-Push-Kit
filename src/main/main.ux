@@ -1,0 +1,76 @@
+<template>
+  <!-- Only one root node is allowed in template. -->
+  <div class="container">
+    <div class="push_info">
+      <text class="push_token" id="token_info">{{message}}</text>
+      <input type="button" class="btn" value="Show Token" onclick="getToken" />
+    </div>
+  </div>
+</template>
+
+<style>
+  .push_info {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .container {
+    justify-content: center;
+  }
+
+  .push_token {
+    font-size: 30px;
+    margin: 30px;
+  }
+  .btn {
+    width: 100%;
+  }
+</style>
+
+<script>
+  import push from '@service.push';
+  module.exports = {
+    data: {
+      componentData: {},
+      message: 'Click to button to get token',
+      token: ""
+    },
+    onInit() {
+      this.$page.setTitleBar({
+        text: 'Quick App with Push Kit',
+        textColor: '#ffffff',
+        backgroundColor: '#007DFF',
+        backgroundOpacity: 0.5,
+        menu: true
+      });
+    },
+    sendToServer: function () {
+      console.log("Token sent to server.");
+    },
+    onReady(options) {
+      var pushProvider = push.getProvider();
+      var anchor = this;
+
+      if (pushProvider === "huawei") {
+        push.subscribe({
+          success: function (data) {
+            console.log('push.subscribe succeeded, result data = ' + JSON.stringify(data));
+            anchor.token = data;
+            anchor.sendToServer();
+          },
+          fail: function (data, code) {
+            console.log('push.subscribe failed, result data = ' + JSON.stringify(data) + ', code = ' + code);
+          },
+          complete: function () {
+            console.log('push.subscribe completed');
+          }
+        })
+      }
+
+    },
+    getToken() {
+      var that = this;
+      that.message = that.token.regId;
+    }
+  }
+</script>
