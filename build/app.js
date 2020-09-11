@@ -113,7 +113,7 @@ $app_bootstrap$('@app-application/app',{packagerName:'fa-toolkit', packagerVersi
 /*! exports provided: package, name, versionName, versionCode, icon, minPlatformVersion, features, permissions, config, router, display, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"package\":\"com.sezerbozkir.quickappwithpushkit\",\"name\":\"QuickAppwithPushKit\",\"versionName\":\"1.0.0\",\"versionCode\":1,\"icon\":\"/Common/logo.png\",\"minPlatformVersion\":1060,\"features\":[{\"name\":\"service.push\"}],\"permissions\":[{\"origin\":\"*\"}],\"config\":{},\"router\":{\"entry\":\"Main\",\"pages\":{\"Main\":{\"component\":\"main\"}}},\"display\":{\"pages\":{\"Main\":{\"titleBarText\":\"TitleBar\"}}}}");
+module.exports = JSON.parse("{\"package\":\"com.sezerbozkir.quickappwithpushkit\",\"name\":\"QuickAppwithPushKit\",\"versionName\":\"1.0.0\",\"versionCode\":1,\"icon\":\"/Common/logo.png\",\"minPlatformVersion\":1060,\"features\":[{\"name\":\"service.push\"},{\"name\":\"system.prompt\"}],\"permissions\":[{\"origin\":\"*\"}],\"config\":{},\"router\":{\"entry\":\"Main\",\"pages\":{\"Main\":{\"component\":\"main\"}}},\"display\":{\"pages\":{\"Main\":{\"titleBarText\":\"TitleBar\"}}}}");
 
 /***/ }),
 

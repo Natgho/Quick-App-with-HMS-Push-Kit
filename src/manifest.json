@@ -5,9 +5,14 @@
   "versionCode": 1,
   "icon": "/Common/logo.png",
   "minPlatformVersion": 1060,
-  "features": [    {
+  "features": [
+    {
       "name": "service.push"
-    }],
+    },
+    {
+      "name": "system.prompt"
+    }
+  ],
   "permissions": [
     {
       "origin": "*"

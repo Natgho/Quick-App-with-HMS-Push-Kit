@@ -8,6 +8,9 @@
   "features": [
     {
       "name": "service.push"
+    },
+    {
+      "name": "system.prompt"
     }
   ],
   "permissions": [
