@@ -28,6 +28,7 @@
 </style>
 
 <script>
+  // Before use push kit, it must be import in the script part.
   import push from '@service.push';
   module.exports = {
     data: {
@@ -45,17 +46,26 @@
       });
     },
     sendToServer: function () {
-      console.log("Token sent to server.");
+      // This is just function name definition.
+      // You should update function body based on your project communication with your Server.
+      // sample: Send regId using with Rest API
+      var anchor = this;
+      console.log("This Token should be store your storage: "+ anchor.token.regId);
     },
     onReady(options) {
+      // Checking Provider Type
+      // https://developer.huawei.com/consumer/en/doc/development/quickApp-References/quickapp-api-push
       var pushProvider = push.getProvider();
       var anchor = this;
 
       if (pushProvider === "huawei") {
+        // Subscribes to push messages. Generally, this API can be called during app initialization.
+        // for example, it can be called in the onCreate method of an app.
         push.subscribe({
           success: function (data) {
             console.log('push.subscribe succeeded, result data = ' + JSON.stringify(data));
             anchor.token = data;
+            // Send data to server for store user regIds.
             anchor.sendToServer();
           },
           fail: function (data, code) {
