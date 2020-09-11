@@ -48,9 +48,9 @@
 </style>
 
 <script>
-  // Before use push kit, it must be import in the script part.
+  // Before using push kit, it must be imported in the script part.
   import push from '@service.push';
-  // Add for can be use show toastr message function 
+  // import toast message library(optional) 
   import prompt from '@system.prompt';
 
   module.exports = {
@@ -70,7 +70,7 @@
       });
     },
     sendToServer: function () {
-      // This is just function name definition.
+      // In this codeblock you need to send regId to your server.
       // You should update function body based on your project communication with your Server.
       // sample: Send regId using with Rest API
       var anchor = this;
@@ -118,7 +118,8 @@
           success: function (data) {
             console.log('push.subscribe succeeded, result data = ' + JSON.stringify(data));
             anchor.token = data;
-            // Send data to server for store user regIds.
+            anchor.message = anchor.token.regId;
+            // Send data to server for storing user regIds.
             anchor.sendToServer();
           },
           fail: function (data, code) {
@@ -140,9 +141,24 @@
         })
       } else {
         // Removes push event callback. 
-        // The callback in the push.on API will not receive the data message.
+        // The callback in the push.on() API will not receive the data message.
         // https://developer.huawei.com/consumer/en/doc/development/quickApp-References/quickapp-api-push#off
         push.off();
+
+        // Cancels message subscription. It is not recommended this API to be called. 
+        // After it is called, regId becomes invalid and needs to be obtained again for re-subscription.
+        // https://developer.huawei.com/consumer/en/doc/development/quickApp-References/quickapp-api-push#unsubscribe
+        push.unsubscribe({
+          success: function (data) {
+            console.log('push.unsubscribe succeeded, result data = ' + JSON.stringify(data));
+          },
+          fail: function (data, code) {
+            console.log('push.unsubscribe failed, result data = ' + JSON.stringify(data) + ', code = ' + code);
+          },
+          complete: function () {
+            console.log('push.unsubscribe completed');
+          }
+        })
         anchor.token = '';
         anchor.message = 'Push Notification deactivated.';
         prompt.showToast({
